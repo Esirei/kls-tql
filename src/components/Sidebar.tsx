@@ -63,7 +63,7 @@ export const Sidebar: FC = () => {
   const renderLink = ({ Icon, title, href }: Link) => (
     <Link href={href} key={href}>
       <a
-        className={c('inline-flex items-center gap-2 compact:px-2', {
+        className={c('inline-flex items-center gap-2 hover:text-primary compact:px-2', {
           'font-semibold text-primary': active(href),
         })}
         href={href}>
