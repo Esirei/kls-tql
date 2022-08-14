@@ -74,7 +74,9 @@ const Home: NextPage = () => {
 
       <div className="mt-4 flex flex-col gap-6 xl:flex-row">
         <div className="h-72 grow rounded-lg border border-black p-6">
-          <Image src={SalesChart} alt="Sales chart" layout="responsive" />
+          <div className="relative h-full w-full">
+            <Image src={SalesChart} alt="Sales chart" layout="fill" />
+          </div>
         </div>
         <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary p-6 text-white">
           <p className="w-4/5 text-xl font-medium">
