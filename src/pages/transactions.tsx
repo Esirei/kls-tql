@@ -1,8 +1,11 @@
 import { faker } from '@faker-js/faker';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import PaginationItem from '~/components/PaginationItem';
 import SearchIcon from '~icons/search.svg';
 import FilterIcon from '~icons/filter.svg';
+import ChevronLeftIcon from '~icons/chevron-left.svg';
+import ChevronRightIcon from '~icons/chevron-right.svg';
 
 type Row = {
   id: string;
@@ -61,7 +64,7 @@ const Transactions: NextPage = () => {
           <h1 className="text-xl font-medium leading-6">Transaction history</h1>
         </div>
 
-        <div className="flex items-center justify-between px-4 py-2">
+        <div className="flex flex-col items-center gap-2 px-4 py-2 md:flex-row md:justify-between">
           <div className="relative">
             <input
               type="text"
@@ -71,7 +74,7 @@ const Transactions: NextPage = () => {
             <SearchIcon className="absolute right-3 top-0 h-full w-6" />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <button className="inline-flex h-10 items-center gap-2.5 rounded-lg border border-black px-5">
               <span className="font-sans-alt text-xs font-semibold">Filter</span>
               <FilterIcon className="h-4 w-4" />
@@ -101,7 +104,21 @@ const Transactions: NextPage = () => {
         </div>
 
         <div className="flex justify-end p-4">
-          <div className="flex items-center rounded-md border border-gray-100 p-3"></div>
+          <div className="flex items-center overflow-hidden rounded-md border border-gray-100">
+            <PaginationItem>
+              <ChevronLeftIcon className="h-4 w-4" />
+            </PaginationItem>
+            <PaginationItem active>1</PaginationItem>
+            <PaginationItem>2</PaginationItem>
+            <PaginationItem>3</PaginationItem>
+            <PaginationItem>...</PaginationItem>
+            <PaginationItem>8</PaginationItem>
+            <PaginationItem>9</PaginationItem>
+            <PaginationItem>10</PaginationItem>
+            <PaginationItem>
+              <ChevronRightIcon className="h-4 w-4" />
+            </PaginationItem>
+          </div>
         </div>
       </div>
     </>
