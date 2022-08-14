@@ -4,9 +4,9 @@ import Image from 'next/image';
 import ChevronDownIcon from '~icons/chevron-down.svg';
 import ArrowDownIcon from '~icons/arrow-down.svg';
 import SalesChart from '~images/sales-chart.png';
-import LastMonthChart from '~images/sales-chart.png';
-import ThisWeekChart from '~images/sales-chart.png';
-import ThisMonthChart from '~images/sales-chart.png';
+import LastMonthChart from '~images/last-month-chart.png';
+import ThisWeekChart from '~images/this-week-chart.png';
+import ThisMonthChart from '~images/this-month-chart.png';
 
 const Home: NextPage = () => {
   return (
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black bg-black p-6 text-white">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="grow">
-            <Image src={SalesChart} alt="Sales chart" layout="responsive" />
+            <Image src={ThisWeekChart} alt="Sales chart" layout="responsive" />
           </div>
           <p className="font-sans-alt text-sm">This week</p>
           <p className="text-xl font-medium">₦1,652.50</p>
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="grow">
-            <Image src={SalesChart} alt="Sales chart" layout="responsive" />
+            <Image src={ThisMonthChart} alt="Sales chart" layout="responsive" />
           </div>
           <p className="font-sans-alt text-sm">This month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="grow">
-            <Image src={SalesChart} alt="Sales chart" layout="responsive" />
+            <Image src={LastMonthChart} alt="Sales chart" layout="responsive" />
           </div>
           <p className="font-sans-alt text-sm">Last month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
