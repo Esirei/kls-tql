@@ -19,7 +19,7 @@
   }
 
   th {
-    @apply pt-8 pb-2;
+    @apply pt-8 pb-2 font-medium;
   }
 
   :is(th, td):first-child {

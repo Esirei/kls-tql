@@ -40,7 +40,7 @@ const Transactions: NextPage = () => {
 
         <div className="overflow-x-scroll">
           <table className="w-full table-auto text-left">
-            <thead className="font-medium">
+            <thead>
               <tr>
                 <th>Transaction ID</th>
                 <th>Source</th>
