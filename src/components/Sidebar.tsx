@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC, useRef } from 'react';
+import { c } from '~/helpers/classNames';
 import Logo from '~icons/logo.svg';
 import DashboardIcon from '~icons/dashboard.svg';
 import BalanceIcon from '~icons/balances.svg';
@@ -50,14 +52,21 @@ const routes: LinksSection[] = [
 
 export const Sidebar: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const toggle = () => {
     ref.current?.classList.toggle('compact');
   };
 
+  const active = (href: string) => href === router.pathname;
+
   const renderLink = ({ Icon, title, href }: Link) => (
-    <Link href={href}>
-      <a className="inline-flex items-center gap-2 compact:px-2" href={href}>
+    <Link href={href} key={href}>
+      <a
+        className={c('inline-flex items-center gap-2 compact:px-2', {
+          'font-semibold text-primary': active(href),
+        })}
+        href={href}>
         <Icon className="h-6 w-6" />
         <span className="compact:hidden">{title}</span>
       </a>
