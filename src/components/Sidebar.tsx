@@ -30,23 +30,23 @@ const routes: LinksSection[] = [
     title: 'Main pages',
     links: [
       { Icon: DashboardIcon, title: 'Dashboard', href: '/' },
-      { Icon: BalanceIcon, title: 'Balances', href: '#' },
+      { Icon: BalanceIcon, title: 'Balances', href: '#balances' },
       { Icon: TransactionIcon, title: 'Transactions', href: '/transactions' },
-      { Icon: AnalyticsIcon, title: 'Analytics', href: '#' },
-      { Icon: MarketingIcon, title: 'Marketing', href: '#' },
-      { Icon: ExchangeIcon, title: 'Exchange rates', href: '#' },
+      { Icon: AnalyticsIcon, title: 'Analytics', href: '#analytics' },
+      { Icon: MarketingIcon, title: 'Marketing', href: '#marketing' },
+      { Icon: ExchangeIcon, title: 'Exchange rates', href: '#exchange-rates' },
     ],
   },
   {
     title: 'Accept payments',
     links: [
-      { Icon: CheckoutIcon, title: 'KlashaCheckout', href: '#' },
-      { Icon: LinksIcon, title: 'Payment Links', href: '#' },
+      { Icon: CheckoutIcon, title: 'KlashaCheckout', href: '#klasha-checkout' },
+      { Icon: LinksIcon, title: 'Payment Links', href: '#payment-links' },
     ],
   },
   {
     title: 'Send payments',
-    links: [{ Icon: KlashaWireIcon, title: 'KlashaWire', href: '#' }],
+    links: [{ Icon: KlashaWireIcon, title: 'KlashaWire', href: '#klasha-wire' }],
   },
 ];
 
@@ -74,7 +74,7 @@ export const Sidebar: FC = () => {
   );
 
   const renderLinkSection = ({ title, links }: LinksSection) => (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start gap-4" key={title}>
       <p className="font-sans font-medium text-gray-400 compact:hidden">{title}</p>
       <div className="hidden h-px bg-gray-300 compact:block" />
       {links.map(renderLink)}
