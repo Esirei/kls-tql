@@ -29,6 +29,7 @@ const routes: LinksSection[] = [
   {
     title: 'Main pages',
     links: [
+      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       { Icon: DashboardIcon, title: 'Dashboard', href: '/' },
       { Icon: BalanceIcon, title: 'Balances', href: '#balances' },
       { Icon: TransactionIcon, title: 'Transactions', href: '/transactions' },
@@ -47,6 +48,7 @@ const routes: LinksSection[] = [
   {
     title: 'Send payments',
     links: [{ Icon: KlashaWireIcon, title: 'KlashaWire', href: '#klasha-wire' }],
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment */
   },
 ];
 
