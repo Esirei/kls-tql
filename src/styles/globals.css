@@ -4,3 +4,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  table {
+    @apply text-[#464646];
+  }
+
+  th, td {
+    @apply px-7 py-6 border-b border-gray-100;
+  }
+
+  tbody > tr:last-child > td {
+    @apply border-b-0;
+  }
+
+  th {
+    @apply pt-8 pb-2;
+  }
+
+  :is(th, td):first-child {
+    @apply pl-8;
+  }
+
+  :is(th, td):last-child {
+    @apply pr-8;
+  }
+}
