@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import ChevronDownIcon from '~icons/chevron-down.svg';
 import ArrowDownIcon from '~icons/arrow-down.svg';
+import SalesChart from '~images/sales-chart.png';
 
 const Home: NextPage = () => {
   return (
@@ -15,10 +16,28 @@ const Home: NextPage = () => {
       <h1 className="text-xl font-medium leading-8">Sales overview</h1>
 
       <div className="mt-4 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <div className="h-60 rounded-lg border border-black p-6"></div>
-        <div className="h-60 rounded-lg border border-black bg-black p-6 text-white"></div>
-        <div className="h-60 rounded-lg border border-black p-6"></div>
-        <div className="h-60 rounded-lg border border-black p-6"></div>
+        <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
+          <p className="font-sans-alt text-sm">Today&apos;s sales</p>
+          <p className="text-xl font-medium">₦1,652.50</p>
+        </div>
+        <div className="flex h-60 flex-col gap-1 rounded-lg border border-black bg-black p-6 text-white">
+          <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
+          <div className="grow"></div>
+          <p className="font-sans-alt text-sm">This week</p>
+          <p className="text-xl font-medium">₦1,652.50</p>
+        </div>
+        <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
+          <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
+          <div className="grow"></div>
+          <p className="font-sans-alt text-sm">This month</p>
+          <p className="text-xl font-medium">₦1,652.50</p>
+        </div>
+        <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
+          <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
+          <div className="grow"></div>
+          <p className="font-sans-alt text-sm">Last month</p>
+          <p className="text-xl font-medium">₦1,652.50</p>
+        </div>
       </div>
 
       <div className="mt-8 flex items-center justify-between xl:mr-72">
@@ -45,8 +64,18 @@ const Home: NextPage = () => {
       </div>
 
       <div className="mt-4 flex flex-col gap-6 xl:flex-row">
-        <div className="h-72 grow rounded-lg border border-black p-6"></div>
-        <div className="h-72 w-72 rounded-lg border border-black bg-primary p-6"></div>
+        <div className="h-72 grow rounded-lg border border-black p-6">
+          <Image src={SalesChart} alt="Sales chart" layout="responsive" />
+        </div>
+        <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary p-6 text-white">
+          <p className="w-4/5 text-xl font-medium">
+            KlashaWire - send money to businesses globally from Africa
+          </p>
+
+          <button className="rounded-md bg-black px-6 py-3 font-sans-alt text-sm font-semibold">
+            Send a Wire
+          </button>
+        </div>
       </div>
     </>
   );
