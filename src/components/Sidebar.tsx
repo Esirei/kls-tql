@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, useRef } from 'react';
 import { c } from '~/helpers/classNames';
 import Logo from '~icons/logo.svg';
+import LogoCompact from '~icons/logo-compact.svg';
 import DashboardIcon from '~icons/dashboard.svg';
 import BalanceIcon from '~icons/balances.svg';
 import TransactionIcon from '~icons/transaction.svg';
@@ -88,7 +89,10 @@ export const Sidebar: FC = () => {
       ref={ref}
       className="flex h-screen w-72 flex-col items-start gap-8 bg-secondary p-12 font-sans-alt transition-all compact:w-16 compact:px-3">
       <Link href="#">
-        <Logo className="h-6" />
+        <>
+          <Logo className="block h-6 compact:hidden" />
+          <LogoCompact className="hidden h-6 px-3 compact:block" />
+        </>
       </Link>
 
       <nav className="flex w-full grow flex-col gap-8 font-sans-alt">
