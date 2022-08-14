@@ -1,9 +1,54 @@
+import { faker } from '@faker-js/faker';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import SearchIcon from '~icons/search.svg';
 import FilterIcon from '~icons/filter.svg';
 
+type Row = {
+  id: string;
+  source: string;
+  name: string;
+  email: string;
+  amount: string;
+  date: Date;
+  status: string;
+};
+
+const data = () => {
+  return Array.from({ length: 4 }).map(() => ({
+    id: faker.helpers.replaceSymbols('??###??????######'),
+    source: faker.helpers.arrayElement(['GTB', 'UBA', 'FBN', 'ECO', 'ABNG']),
+    name: faker.name.fullName(),
+    email: faker.internet.email(),
+    amount: faker.finance.amount(50, 5000, 2, '$', true),
+    date: faker.date.recent(),
+    status: faker.helpers.arrayElement(['Pending', 'Completed', 'Failed']),
+  }));
+};
+
+const formatDate = (date: Date) => {
+  return date
+    .toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+    .replace(/\//g, '.');
+};
+
 const Transactions: NextPage = () => {
+  const renderRow = ({ id, source, name, email, amount, date, status }: Row) => (
+    <tr className="hover:bg-gray-50" key={id}>
+      <td>{id}</td>
+      <td>{source}</td>
+      <td>{name}</td>
+      <td>{email}</td>
+      <td>{amount}</td>
+      <td>{formatDate(date)}</td>
+      <td>{status}</td>
+    </tr>
+  );
+
   return (
     <>
       <Head>
@@ -38,7 +83,7 @@ const Transactions: NextPage = () => {
           </div>
         </div>
 
-        <div className="overflow-x-scroll">
+        <div className="overflow-x-auto">
           <table className="w-full table-auto text-left">
             <thead>
               <tr>
@@ -51,17 +96,7 @@ const Transactions: NextPage = () => {
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody className="font-sans-alt text-sm">
-              <tr className="py-6 px-8 hover:bg-gray-50">
-                <td>GB124QWERTY12346</td>
-                <td>GTB</td>
-                <td>Mike Owen</td>
-                <td>0223337281</td>
-                <td>$230.00</td>
-                <td>24.08.2021</td>
-                <td>Pending</td>
-              </tr>
-            </tbody>
+            <tbody className="font-sans-alt text-sm">{data().map(renderRow)}</tbody>
           </table>
         </div>
 
