@@ -46,7 +46,7 @@ const Home: NextPage = () => {
 
       <div className="mt-4 flex flex-col gap-6 xl:flex-row">
         <div className="h-72 grow rounded-lg border border-black p-6"></div>
-        <div className="h-72 w-72 rounded-lg border border-black p-6 bg-primary"></div>
+        <div className="h-72 w-72 rounded-lg border border-black bg-primary p-6"></div>
       </div>
     </>
   );
