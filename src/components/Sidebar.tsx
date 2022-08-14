@@ -57,15 +57,15 @@ export const Sidebar: FC = () => {
 
   const renderLink = ({ Icon, title, href }: Link) => (
     <Link href={href}>
-      <span className="inline-flex items-center gap-2 compact:px-2">
+      <a className="inline-flex items-center gap-2 compact:px-2" href={href}>
         <Icon className="h-6 w-6" />
         <span className="compact:hidden">{title}</span>
-      </span>
+      </a>
     </Link>
   );
 
   const renderLinkSection = ({ title, links }: LinksSection) => (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col items-start gap-4">
       <p className="font-sans font-medium text-gray-400 compact:hidden">{title}</p>
       <div className="hidden h-px bg-gray-300 compact:block" />
       {links.map(renderLink)}
