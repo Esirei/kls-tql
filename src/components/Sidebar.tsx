@@ -66,20 +66,23 @@ export const Sidebar: FC = () => {
   const renderLink = ({ Icon, title, href }: Link) => (
     <Link href={href} key={href}>
       <a
-        className={c('inline-flex items-center gap-2 hover:text-primary compact:px-2', {
-          'font-semibold text-primary': active(href),
-        })}
+        className={c(
+          'inline-flex items-center gap-2 px-2 hover:text-primary compact:px-2 lg:px-0',
+          {
+            'font-semibold text-primary': active(href),
+          },
+        )}
         href={href}>
         <Icon className="h-6 w-6" />
-        <span className="compact:hidden">{title}</span>
+        <span className="hidden compact:hidden lg:inline">{title}</span>
       </a>
     </Link>
   );
 
   const renderLinkSection = ({ title, links }: LinksSection) => (
     <div className="flex flex-col items-start gap-4" key={title}>
-      <p className="font-sans font-medium text-gray-400 compact:hidden">{title}</p>
-      <div className="hidden h-px bg-gray-300 compact:block" />
+      <p className="hidden font-sans font-medium text-gray-400 compact:hidden lg:block">{title}</p>
+      <div className="h-px bg-gray-300 compact:block lg:hidden" />
       {links.map(renderLink)}
     </div>
   );
@@ -87,11 +90,11 @@ export const Sidebar: FC = () => {
   return (
     <div
       ref={ref}
-      className="flex h-screen w-72 flex-col items-start gap-8 bg-secondary p-12 font-sans-alt transition-all compact:w-16 compact:px-3">
+      className="sticky top-0 flex h-screen w-16 flex-col items-start gap-8 bg-secondary py-12 px-3 font-sans-alt transition-all compact:w-16 compact:px-3 lg:w-72 lg:px-12">
       <Link href="#">
         <>
-          <Logo className="block h-6 compact:hidden" />
-          <LogoCompact className="hidden h-6 px-3 compact:block" />
+          <Logo className="hidden h-6 compact:hidden lg:block" />
+          <LogoCompact className="block h-6 px-3 compact:block lg:hidden" />
         </>
       </Link>
 
@@ -101,7 +104,7 @@ export const Sidebar: FC = () => {
 
       <button
         onClick={toggle}
-        className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 transition-all compact:p-3">
+        className="hidden h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 transition-all compact:p-3 lg:inline-flex">
         <ChevronLeftIcon className="h-4 w-4 transition-all compact:rotate-180" />
         <span className="font-sans-alt text-xs font-semibold transition-all compact:hidden">
           Hide panel
