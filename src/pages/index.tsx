@@ -23,26 +23,29 @@ const Home: NextPage = () => {
           <p className="font-sans-alt text-sm">Today&apos;s sales</p>
           <p className="text-xl font-medium">₦1,652.50</p>
         </div>
+
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black bg-black p-6 text-white">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
-          <div className="grow">
-            <Image src={ThisWeekChart} alt="Sales chart" layout="responsive" />
+          <div className="relative grow">
+            <Image src={ThisWeekChart} alt="Sales chart" layout="fill" />
           </div>
           <p className="font-sans-alt text-sm">This week</p>
           <p className="text-xl font-medium">₦1,652.50</p>
         </div>
+
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
-          <div className="grow">
-            <Image src={ThisMonthChart} alt="Sales chart" layout="responsive" />
+          <div className="relative grow">
+            <Image src={ThisMonthChart} alt="Sales chart" layout="fill" />
           </div>
           <p className="font-sans-alt text-sm">This month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
         </div>
+
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
-          <div className="grow">
-            <Image src={LastMonthChart} alt="Sales chart" layout="responsive" />
+          <div className="relative grow">
+            <Image src={LastMonthChart} alt="Sales chart" layout="fill" />
           </div>
           <p className="font-sans-alt text-sm">Last month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
