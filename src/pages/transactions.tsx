@@ -1,56 +1,113 @@
 import { faker } from '@faker-js/faker';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import PaginationItem from '~/components/PaginationItem';
 import SearchIcon from '~icons/search.svg';
 import FilterIcon from '~icons/filter.svg';
 import ChevronLeftIcon from '~icons/chevron-left.svg';
 import ChevronRightIcon from '~icons/chevron-right.svg';
 
-type Row = {
+type Transaction = {
   id: string;
   source: string;
   name: string;
   email: string;
   amount: string;
-  date: Date;
+  date: string;
   status: string;
 };
 
-const data = () => {
-  return Array.from({ length: 4 }).map(() => ({
-    id: faker.helpers.replaceSymbols('??###??????######'),
-    source: faker.helpers.arrayElement(['GTB', 'UBA', 'FBN', 'ECO', 'ABNG']),
-    name: faker.name.fullName(),
-    email: faker.internet.email(),
-    amount: faker.finance.amount(50, 5000, 2, '$', true),
-    date: faker.date.recent(),
-    status: faker.helpers.arrayElement(['Pending', 'Completed', 'Failed']),
-  }));
+type Props = {
+  transactions: Transaction[];
+  page: number;
+  total: number;
+  perPage: number;
+  lastPage: number;
 };
 
-const formatDate = (date: Date) => {
-  return date
-    .toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    })
-    .replace(/\//g, '.');
-};
+const Transactions: NextPage<Props> = ({ transactions, page, total, perPage, lastPage }) => {
+  const router = useRouter();
 
-const Transactions: NextPage = () => {
-  const renderRow = ({ id, source, name, email, amount, date, status }: Row) => (
+  const renderRow = ({ id, source, name, email, amount, date, status }: Transaction) => (
     <tr className="hover:bg-gray-50" key={id}>
       <td>{id}</td>
       <td>{source}</td>
       <td>{name}</td>
       <td>{email}</td>
       <td>{amount}</td>
-      <td>{formatDate(date)}</td>
+      <td>{date}</td>
       <td>{status}</td>
     </tr>
   );
+
+  const get = async ({ page, search }: { page?: number; search?: string }) => {
+    await router.push({ pathname: router.pathname, query: { page, search } });
+  };
+
+  const paginate = (page: number) => get({ ...router.query, page });
+
+  const search = (search?: string) => get({ search });
+
+  const generateLinksSection = (page: number, pages: number, padding = 1) => {
+    const links = [];
+    const start = Math.max(1, page - padding);
+    const end = Math.min(pages, page + padding);
+
+    for (let i = start; i <= end; i++) {
+      links.push(i);
+    }
+
+    return links;
+  };
+
+  const generateLinks = () => {
+    const totalPages = Math.ceil(total / perPage);
+    const midPage = Math.ceil(lastPage / 2);
+    const links: (string | number)[] = generateLinksSection(1, lastPage, 2);
+    const pageLinks = generateLinksSection(page, lastPage);
+    const midLinks = generateLinksSection(midPage, lastPage);
+    const endLinks = generateLinksSection(totalPages, lastPage, 2);
+
+    const merge = (newLinks: number[]) => {
+      for (let i = 0; i < newLinks.length; i++) {
+        const link = newLinks[i];
+
+        if (links.includes(link)) {
+          continue;
+        } else if (i === 0 && links[links.length - 1] !== link - 1) {
+          links.push('...');
+        }
+
+        links.push(link);
+      }
+    };
+
+    if (page > midPage) {
+      merge(midLinks);
+      merge(pageLinks);
+    } else {
+      merge(pageLinks);
+      merge(midLinks);
+    }
+
+    merge(endLinks);
+
+    return links;
+  };
+
+  const renderPaginationItem = (item: number | string, index: number) => {
+    const isActive = item === page;
+    const isEllipsis = item === '...';
+    const onClick = () => void (isEllipsis ? undefined : paginate(item as number));
+    return (
+      <PaginationItem key={`${item}-${index}`} onClick={onClick} active={isActive}>
+        {item}
+      </PaginationItem>
+    );
+  };
+
+  console.log({ transactions });
 
   return (
     <>
@@ -68,6 +125,7 @@ const Transactions: NextPage = () => {
           <div className="relative">
             <input
               type="text"
+              onChange={e => void search(e.target?.value)}
               className="rounded-lg border border-gray-100 py-2.5 pl-3 pr-12 font-sans-alt text-sm placeholder:text-gray-700"
               placeholder="Search"
             />
@@ -99,23 +157,17 @@ const Transactions: NextPage = () => {
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody className="font-sans-alt text-sm">{data().map(renderRow)}</tbody>
+            <tbody className="font-sans-alt text-sm">{transactions.map(renderRow)}</tbody>
           </table>
         </div>
 
         <div className="flex justify-end p-4">
           <div className="flex items-center overflow-hidden rounded-md border border-gray-100">
-            <PaginationItem>
+            <PaginationItem onClick={() => void paginate(page !== 1 ? page - 1 : 1)}>
               <ChevronLeftIcon className="h-4 w-4" />
             </PaginationItem>
-            <PaginationItem active>1</PaginationItem>
-            <PaginationItem>2</PaginationItem>
-            <PaginationItem>3</PaginationItem>
-            <PaginationItem>...</PaginationItem>
-            <PaginationItem>8</PaginationItem>
-            <PaginationItem>9</PaginationItem>
-            <PaginationItem>10</PaginationItem>
-            <PaginationItem>
+            {generateLinks().map(renderPaginationItem)}
+            <PaginationItem onClick={() => void paginate(page !== lastPage ? page + 1 : lastPage)}>
               <ChevronRightIcon className="h-4 w-4" />
             </PaginationItem>
           </div>
@@ -126,3 +178,46 @@ const Transactions: NextPage = () => {
 };
 
 export default Transactions;
+
+const formatDate = (date: Date) => {
+  return date
+    .toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+    .replace(/\//g, '.');
+};
+
+const allTransactions = Array.from({ length: 100 }).map(() => ({
+  id: faker.helpers.replaceSymbols('??###??????######'),
+  source: faker.helpers.arrayElement(['GTB', 'UBA', 'FBN', 'ECO', 'ABNG']),
+  name: faker.name.fullName(),
+  email: faker.internet.email(),
+  amount: faker.finance.amount(50, 5000, 2, '$', true),
+  date: formatDate(faker.date.recent()),
+  status: faker.helpers.arrayElement(['Pending', 'Completed', 'Failed']),
+}));
+
+const PER_PAGE = 5;
+
+export const getServerSideProps: GetServerSideProps = context => {
+  const page = Number(context.query.page ?? 1);
+  const search = (context.query.search as string) ?? '';
+  const start = (page - 1) * PER_PAGE;
+  const end = page * PER_PAGE;
+  let transactions = allTransactions;
+
+  if (search) {
+    transactions = allTransactions.filter(({ name }) =>
+      name.toLowerCase().includes(search.toLowerCase()),
+    );
+  }
+
+  const total = transactions.length;
+
+  transactions = transactions.slice(start, end);
+  return {
+    props: { transactions, page, total, perPage: PER_PAGE, lastPage: Math.ceil(total / PER_PAGE) },
+  };
+};
