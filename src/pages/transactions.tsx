@@ -201,7 +201,9 @@ const allTransactions = Array.from({ length: 100 }).map(() => ({
 
 const PER_PAGE = 5;
 
-export const getServerSideProps: GetServerSideProps = context => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const getServerSideProps: GetServerSideProps<Props> = context => {
   const page = Number(context.query.page ?? 1);
   const search = (context.query.search as string) ?? '';
   const start = (page - 1) * PER_PAGE;
