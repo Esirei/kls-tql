@@ -29,6 +29,8 @@ type Props = {
 const Transactions: NextPage<Props> = ({ transactions, page, total, perPage, lastPage }) => {
   const router = useRouter();
 
+  console.log(transactions.length);
+
   const renderRow = ({ id, source, name, email, amount, date, status }: Transaction) => (
     <tr className="hover:bg-gray-50" key={id}>
       <td>{id}</td>
@@ -204,14 +206,14 @@ const PER_PAGE = 5;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps<Props> = context => {
-  const page = Number(context.query.page ?? 1);
+  const page = Number(context.query.page || 1);
   const search = (context.query.search as string) ?? '';
   const start = (page - 1) * PER_PAGE;
   const end = page * PER_PAGE;
   let transactions = allTransactions;
 
   if (search) {
-    transactions = allTransactions.filter(({ name }) =>
+    transactions = transactions.filter(({ name }) =>
       name.toLowerCase().includes(search.toLowerCase()),
     );
   }
