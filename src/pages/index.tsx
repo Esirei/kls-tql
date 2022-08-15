@@ -78,7 +78,8 @@ const Home: NextPage = () => {
             <Image src={SalesChart} alt="Sales chart" layout="fill" />
           </div>
         </div>
-        <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary p-6 text-white">
+
+        <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary bg-wire p-6 text-white">
           <p className="w-4/5 text-xl font-medium">
             KlashaWire - send money to businesses globally from Africa
           </p>

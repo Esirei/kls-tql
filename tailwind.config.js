@@ -15,6 +15,10 @@ module.exports = {
         sans: ['General Sans', ...defaultTheme.fontFamily.sans],
         'sans-alt': ['Inter', ...defaultTheme.fontFamily.sans],
       },
+
+      backgroundImage: {
+        wire: 'url("/patterns/wire-background.svg")',
+      },
     },
   },
 
