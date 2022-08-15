@@ -1,12 +1,35 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from 'recharts';
 import ChevronDownIcon from '~icons/chevron-down.svg';
 import ArrowDownIcon from '~icons/arrow-down.svg';
-import SalesChart from '~images/sales-chart.png';
-import LastMonthChart from '~images/last-month-chart.png';
-import ThisWeekChart from '~images/this-week-chart.png';
-import ThisMonthChart from '~images/this-month-chart.png';
+
+const salesData = [
+  {
+    date: '20 Aug',
+    amount: 2200,
+  },
+  {
+    date: '21 Aug',
+    amount: 2100,
+  },
+  {
+    date: '22 Aug',
+    amount: 1500,
+  },
+  {
+    date: '23 Aug',
+    amount: 4000,
+  },
+  {
+    date: '24 Aug',
+    amount: 2400,
+  },
+  {
+    date: '25 Aug',
+    amount: 2500,
+  },
+];
 
 const Home: NextPage = () => {
   return (
@@ -27,7 +50,23 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black bg-black p-6 text-white">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="relative grow">
-            <Image src={ThisWeekChart} alt="Sales chart" layout="fill" />
+            <ResponsiveContainer>
+              <AreaChart data={salesData}>
+                <defs>
+                  <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="15%" stopColor="#EF2C5A" stopOpacity={0.15} />
+                    <stop offset="95%" stopColor="#EF2C5A" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <Area
+                  dataKey={'amount'}
+                  type={'linear'}
+                  stroke={'#EF2C5A'}
+                  fill={'url(#colorSales)'}
+                  fillOpacity={1}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
           <p className="font-sans-alt text-sm">This week</p>
           <p className="text-xl font-medium">₦1,652.50</p>
@@ -36,7 +75,17 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="relative grow">
-            <Image src={ThisMonthChart} alt="Sales chart" layout="fill" />
+            <ResponsiveContainer>
+              <AreaChart data={salesData}>
+                <Area
+                  dataKey={'amount'}
+                  type={'linear'}
+                  stroke={'#EF2C5A'}
+                  fill={'url(#colorSales)'}
+                  fillOpacity={1}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
           <p className="font-sans-alt text-sm">This month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
@@ -45,7 +94,17 @@ const Home: NextPage = () => {
         <div className="flex h-60 flex-col gap-1 rounded-lg border border-black p-6">
           <p className="font-sans-alt text-sm">24 Aug - 01 Sep 21</p>
           <div className="relative grow">
-            <Image src={LastMonthChart} alt="Sales chart" layout="fill" />
+            <ResponsiveContainer>
+              <AreaChart data={salesData}>
+                <Area
+                  dataKey={'amount'}
+                  type={'linear'}
+                  stroke={'#EF2C5A'}
+                  fill={'url(#colorSales)'}
+                  fillOpacity={1}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
           <p className="font-sans-alt text-sm">Last month</p>
           <p className="text-xl font-medium">₦1,652.50</p>
@@ -77,9 +136,20 @@ const Home: NextPage = () => {
 
       <div className="mt-4 flex flex-col gap-6 xl:flex-row">
         <div className="h-72 grow rounded-lg border border-black p-6">
-          <div className="relative h-full w-full">
-            <Image src={SalesChart} alt="Sales chart" layout="fill" />
-          </div>
+          <ResponsiveContainer>
+            <AreaChart data={salesData}>
+              <XAxis dataKey={'date'} axisLine={false} padding={{ left: 16, right: 16 }} />
+              <YAxis axisLine={false} padding={{ top: 16, bottom: 16 }} />
+              <CartesianGrid vertical={false} stroke={'#F1F1F1'} />
+              <Area
+                dataKey={'amount'}
+                type={'linear'}
+                stroke={'#EF2C5A'}
+                fill={'url(#colorSales)'}
+                fillOpacity={1}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
 
         <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary bg-wire p-6 text-white">
