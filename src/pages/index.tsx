@@ -111,7 +111,7 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-between xl:mr-72">
+      <div className="mt-8 flex flex-col items-center justify-between gap-2 lg:flex-row xl:mr-72">
         <div className="flex items-center gap-2.5">
           <h2 className="text-xl font-medium leading-8">Sales</h2>
 
@@ -121,17 +121,24 @@ const Home: NextPage = () => {
             <span className="text-primary">7 days</span>
             <span>30 days</span>
 
-            <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4">
+            <button className="hidden h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 lg:inline-flex">
               <span className="font-sans-alt text-sm font-medium">USD</span>
               <ChevronDownIcon className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 xl:mr-6">
-          <ArrowDownIcon className="h-4 w-4" />
-          <span className="font-sans-alt text-xs font-semibold">Download report</span>
-        </button>
+        <div className="flex items-center justify-between gap-2">
+          <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 lg:hidden">
+            <span className="font-sans-alt text-sm font-medium">USD</span>
+            <ChevronDownIcon className="h-4 w-4" />
+          </button>
+
+          <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 xl:mr-6">
+            <ArrowDownIcon className="h-4 w-4" />
+            <span className="font-sans-alt text-xs font-semibold">Download report</span>
+          </button>
+        </div>
       </div>
 
       <div className="mt-4 flex flex-col gap-6 xl:flex-row">
@@ -152,7 +159,7 @@ const Home: NextPage = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="flex h-72 w-72 flex-col items-start justify-between rounded-lg bg-primary bg-wire p-6 text-white">
+        <div className="flex h-72 w-72 shrink-0 flex-col items-start justify-between rounded-lg bg-primary bg-wire p-6 text-white">
           <p className="w-4/5 text-xl font-medium">
             KlashaWire - send money to businesses globally from Africa
           </p>

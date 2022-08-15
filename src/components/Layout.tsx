@@ -15,9 +15,10 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
     <div className="flex min-h-screen bg-white text-black">
       <Sidebar />
 
-      <div className="flex h-screen grow flex-col overflow-hidden">
-        <header className="flex items-center justify-between border-b border-gray-100 px-8 pb-4 pt-12 font-sans-alt font-medium">
-          Today: {date()}
+      <div className="flex grow flex-col overflow-hidden md:h-screen">
+        <header className="flex flex-col justify-between gap-2 border-b border-gray-100 px-8 pb-4 pt-12 font-sans-alt font-medium md:flex-row md:items-center">
+          <span className="text-left">Today: {date()}</span>
+
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <div className="inline-flex h-6 w-11 cursor-pointer justify-end rounded-full bg-primary p-0.5">
