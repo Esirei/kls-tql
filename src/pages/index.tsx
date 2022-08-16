@@ -111,7 +111,7 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      <div className="mt-8 flex flex-col items-center justify-between gap-2 lg:flex-row xl:mr-72">
+      <div className="mt-8 flex flex-col items-center justify-between gap-2 md:flex-row xl:mr-72">
         <div className="flex items-center gap-2.5">
           <h2 className="text-xl font-medium leading-8">Sales</h2>
 
@@ -121,7 +121,7 @@ const Home: NextPage = () => {
             <span className="text-primary">7 days</span>
             <span>30 days</span>
 
-            <button className="hidden h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 lg:inline-flex">
+            <button className="hidden h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 md:inline-flex">
               <span className="font-sans-alt text-sm font-medium">USD</span>
               <ChevronDownIcon className="h-4 w-4" />
             </button>
@@ -129,7 +129,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className="flex items-center justify-between gap-2">
-          <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 lg:hidden">
+          <button className="inline-flex h-10 items-center gap-2.5 rounded-md border border-black py-3 px-4 md:hidden">
             <span className="font-sans-alt text-sm font-medium">USD</span>
             <ChevronDownIcon className="h-4 w-4" />
           </button>
